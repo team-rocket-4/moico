@@ -1,12 +1,8 @@
 import { type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 
-import { prisma } from "@moico/db";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID as string,

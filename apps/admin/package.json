@@ -8,12 +8,10 @@
     "clean": "rm -rf .next .turbo node_modules",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@moico/api": "*",
     "@moico/auth": "*",
-    "@moico/db": "*",
     "@moico/tailwind-config": "*",
     "@tanstack/react-query": "^4.16.1",
     "@trpc/client": "^10.1.0",

@@ -7,10 +7,9 @@
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint . --ext .ts,.tsx",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@moico/db": "*",
     "@next-auth/prisma-adapter": "^1.0.5",
     "next": "^13.0.5",
     "next-auth": "^4.17.0",
