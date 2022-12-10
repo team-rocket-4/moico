@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
-  "exclude": [],
-  "include": ["**/*.ts", "**/*.cjs", "**/*.mjs"],
+  "include": ["**/*.ts", "**/*.cjs", "**/*.mjs", ".eslintrc.cjs"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
