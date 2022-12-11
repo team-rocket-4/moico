@@ -1,6 +1,5 @@
 packages:
   - apps/admin
-  - packages/api
+  - apps/server
   - packages/auth
-  - packages/db
   - packages/config/*

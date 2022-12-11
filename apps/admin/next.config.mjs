@@ -11,7 +11,7 @@ const config = {
   swcMinify: true,
   experimental: {
     // Enables hot-reload and easy integration for local packages
-    transpilePackages: ["@moico/api", "@moico/auth", "@moico/db"],
+    transpilePackages: ["@moico/auth"],
   },
   // We already do linting on GH actions
   eslint: {
