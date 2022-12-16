@@ -23,7 +23,11 @@ export default async function handler(
       },
     );
 
+    console.log(response);
+
     const result = await response.json();
+
+    console.log(result);
 
     res.status(200).json(result);
   }

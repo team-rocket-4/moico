@@ -4,13 +4,20 @@ import { useRouter } from "next/router";
 export default function DonePage() {
   const { query } = useRouter();
 
-  const { data } = useQuery(["access-token"], async () => {
-    const res = await fetch(`/api/access-token?code=${query.code}`);
+  const { data } = useQuery(
+    ["access-token"],
+    async () => {
+      const res = await fetch(`/api/access-token?code=${query.code}`);
 
-    console.log(res);
+      const result = await res.json();
+      console.log(result);
 
-    return res;
-  });
+      return result;
+    },
+    {
+      enabled: query.code != null,
+    },
+  );
 
   console.log(data);
 
