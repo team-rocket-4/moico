@@ -6,7 +6,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const response = await fetch(
-      "https://imjaehoo.cafe24api.com/api/v2/oauth/token",
+      `https://${req.query.mallId}.cafe24api.com/api/v2/oauth/token`,
       {
         method: "POST",
         headers: {
