@@ -15,11 +15,7 @@ export default async function handler(
           ).toString("base64")}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
-          grant_type: "authorization_code",
-          code: req.query.code,
-          redirect_uri: "https://moico-admin.vercel.app/really-done",
-        }),
+        body: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=https://moico-admin.vercel.app/really-done`,
       },
     );
 
