@@ -11,7 +11,7 @@ export default async function handler(
         method: "POST",
         headers: {
           Authorization: `Basic ${Buffer.from(
-            "OwndE7DgN1Nv2RsPA2euHG:OwndE7DgN1Nv2RsPA2euHG",
+            `OwndE7DgN1Nv2RsPA2euHG:${process.env.CAFE24_CLIENT_SECRET}`,
           ).toString("base64")}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
