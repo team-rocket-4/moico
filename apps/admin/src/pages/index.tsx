@@ -28,9 +28,7 @@ export default function AdminHome() {
       return;
     }
 
-    window.location.href = `http://localhost:3000/done?data=${JSON.stringify(
-      data,
-    )}`;
+    window.location.href = `http://localhost:3000?data=${JSON.stringify(data)}`;
   }, [data, mallId]);
 
   return <h1>done</h1>;
