@@ -6,6 +6,7 @@ export default function Test() {
   const { query, replace } = useRouter();
   const mallId =
     typeof window !== "undefined" ? sessionStorage.getItem("mallId") : null;
+  console.log(query);
 
   const { data } = useQuery(
     ["access-token"],
@@ -34,7 +35,7 @@ export default function Test() {
   }, [data, mallId]);
 
   useEffect(() => {
-    if (window.location.host !== "localhost" || query.data == null) {
+    if (window.location.hostname !== "localhost" || query.data == null) {
       return;
     }
 
