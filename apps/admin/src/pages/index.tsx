@@ -6,10 +6,6 @@ export default function AdminHome() {
   const { query } = useRouter();
   const mallId =
     typeof window !== "undefined" ? sessionStorage.getItem("mallId") : null;
-  const 테스트인가 =
-    typeof window !== "undefined"
-      ? sessionStorage.getItem("isTest") === "true"
-      : null;
 
   const { data } = useQuery(
     ["access-token"],
@@ -28,14 +24,14 @@ export default function AdminHome() {
   );
 
   useEffect(() => {
-    if (data == null || !테스트인가) {
+    if (data == null) {
       return;
     }
 
     window.location.href = `http://localhost:3000/done?data=${JSON.stringify(
       data,
     )}`;
-  }, [data, mallId, 테스트인가]);
+  }, [data, mallId]);
 
   return <h1>done</h1>;
 }
