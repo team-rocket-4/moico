@@ -4,8 +4,12 @@ import { useEffect } from "react";
 
 export default function AdminHome() {
   const { query } = useRouter();
-  const mallId = sessionStorage.getItem("mallId");
-  const 테스트인가 = sessionStorage.getItem("isTest") === "true";
+  const mallId =
+    typeof window !== "undefined" ? sessionStorage.getItem("mallId") : null;
+  const 테스트인가 =
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("isTest") === "true"
+      : null;
 
   const { data } = useQuery(
     ["access-token"],
