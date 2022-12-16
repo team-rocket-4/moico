@@ -5,8 +5,9 @@ import { useEffect } from "react";
 export default function Test() {
   const { query, replace } = useRouter();
   const mallId =
-    typeof window !== "undefined" ? sessionStorage.getItem("mallId") : null;
-  console.log(query);
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("@moico/cafe24/mallId")
+      : null;
 
   const { data } = useQuery(
     ["access-token"],
@@ -39,7 +40,7 @@ export default function Test() {
       return;
     }
 
-    localStorage.setItem("@cafe24/auth-info", query.data as string);
+    localStorage.setItem("@moico/cafe24/auth-info", query.data as string);
 
     replace("/test");
   }, [query.data, replace]);
