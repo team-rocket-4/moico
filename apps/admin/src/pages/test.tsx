@@ -42,7 +42,7 @@ export default function Test() {
 
     localStorage.setItem("@moico/cafe24/auth-info", query.data as string);
 
-    replace("/test");
+    replace("/");
   }, [query.data, replace]);
 
   return <h1>Test</h1>;

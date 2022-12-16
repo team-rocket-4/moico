@@ -2,7 +2,8 @@ import { useEffect } from "react";
 
 export default function AdminHome() {
   useEffect(() => {
-    localStorage.getItem("@moico/cafe24/auth-info");
+    const authInfo = localStorage.getItem("@moico/cafe24/auth-info");
+    console.log(authInfo);
   }, []);
 
   return <div>Admin Home</div>;
