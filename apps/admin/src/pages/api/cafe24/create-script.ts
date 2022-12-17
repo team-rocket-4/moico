@@ -17,8 +17,7 @@ export default async function handler(
         },
         body: JSON.stringify({
           request: {
-            // TODO(@Jaehoo-dev): 여기를 S3 버킷 주소로 바꿔야 함. CORS 허용해야 함.
-            src: "https://yourdomain-sample.com/sample-script.js",
+            src: "https://moico-admin.vercel.app/recently-seen-products.js",
             display_location: ["PRODUCT_DETAIL"],
           },
         }),
