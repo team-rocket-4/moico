@@ -11,7 +11,9 @@
   });
 
   // Get current product data from session storage
-  const localRecentProduct1 = sessionStorage.getItem("localRecentProduct1");
+  const localRecentProduct1 = JSON.parse(
+    sessionStorage.getItem("localRecentProduct1"),
+  );
   const currentProductData = localRecentProduct1[0];
 
   // Check if the current product is already in the queue
