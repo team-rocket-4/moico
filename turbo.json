@@ -19,7 +19,7 @@
     },
     "build": {
       "dependsOn": ["^build", "^db-gen"],
-      "outputs": [".admin/**", ".server/**"],
+      "outputs": [".admin/**", ".internal-admin/**", ".server/**"],
       "cache": false
     },
     "lint": {
