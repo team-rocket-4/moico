@@ -13,7 +13,7 @@ export default function Test() {
     ["access-token"],
     async () => {
       const res = await fetch(
-        `/api/access-token?code=${query.code}&mallId=${mallId}`,
+        `/api/cafe24/access-token?code=${query.code}&mallId=${mallId}`,
       );
 
       const result = await res.json();
