@@ -1,7 +1,6 @@
 packages:
   - apps/admin
   - apps/internal-admin
-  - apps/server
   - packages/api
   - packages/auth
   - packages/config/*
