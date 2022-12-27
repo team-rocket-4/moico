@@ -5,13 +5,23 @@ export const cafe24Router = router({
   accessToken: publicProcedure
     .input(
       z.object({
-        code: z.string(),
         mallId: z.string(),
+        code: z.string(),
       }),
     )
-    .query(async ({ input: { code, mallId } }) => {
+    .query(async ({ input: { mallId, code } }) => {
       const res = await fetch(
-        `/api/cafe24/access-token?code=${code}&mallId=${mallId}`,
+        `https://${mallId}.cafe24api.com/api/v2/oauth/token`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${Buffer.from(
+              `OwndE7DgN1Nv2RsPA2euHG:${process.env.CAFE24_CLIENT_SECRET}`,
+            ).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `grant_type=authorization_code&code=${code}&redirect_uri=https://moico-admin.vercel.app/test`,
+        },
       );
 
       return res.json();
@@ -24,7 +34,7 @@ export const cafe24Router = router({
       }),
     )
     .mutation(async ({ input: { mallId, accessToken } }) => {
-      const response = await fetch(
+      const res = await fetch(
         `https://${mallId}.cafe24api.com/api/v2/admin/scripttags`,
         {
           method: "POST",
@@ -41,6 +51,6 @@ export const cafe24Router = router({
         },
       );
 
-      return response.json();
+      return res.json();
     }),
 });
