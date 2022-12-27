@@ -26,6 +26,7 @@ importers:
 
   apps/admin:
     specifiers:
+      '@moico/api': '*'
       '@moico/auth': '*'
       '@moico/tailwind-config': '*'
       '@tanstack/react-query': ^4.19.1
@@ -48,6 +49,7 @@ importers:
       typescript: ^4.9.4
       zod: ^3.20.2
     dependencies:
+      '@moico/api': link:../../packages/api
       '@moico/auth': link:../../packages/auth
       '@moico/tailwind-config': link:../../packages/config/tailwind
       '@tanstack/react-query': 4.19.1_biqbaboplfbrettd7655fr4n2y
