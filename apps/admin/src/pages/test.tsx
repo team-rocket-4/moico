@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { trpc } from "../utils/trpc";
 
 export default function Test() {
   const { query, replace } = useRouter();
@@ -9,16 +9,10 @@ export default function Test() {
       ? sessionStorage.getItem("@moico/cafe24/mallId")
       : null;
 
-  const { data } = useQuery(
-    ["access-token"],
-    async () => {
-      const res = await fetch(
-        `/api/cafe24/access-token?code=${query.code}&mallId=${mallId}`,
-      );
-
-      const result = await res.json();
-
-      return result;
+  const { data } = trpc.cafe24.accessToken.useQuery(
+    {
+      code: query.code as string,
+      mallId: mallId as string,
     },
     {
       enabled: query.code != null && mallId != null,
