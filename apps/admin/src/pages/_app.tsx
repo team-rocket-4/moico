@@ -4,6 +4,7 @@ import type { Session } from "next-auth";
 import type { AppType } from "next/app";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { trpc } from "../utils/trpc";
 
 const queryClientOptions = {
   defaultOptions: {
@@ -29,4 +30,4 @@ const App: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default App;
+export default trpc.withTRPC(App);
