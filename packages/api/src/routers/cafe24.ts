@@ -1,6 +1,7 @@
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { coreApi } from "@moico/api-client";
+import qs from "qs";
 
 export const cafe24Router = router({
   accessToken: publicProcedure
@@ -13,11 +14,11 @@ export const cafe24Router = router({
     .query(async ({ input: { mallId, code } }) => {
       return coreApi.post(
         `https://${mallId}.cafe24api.com/api/v2/oauth/token`,
-        {
+        qs.stringify({
           grant_type: "authorization_code",
           code,
           redirect_uri: "https://moico-admin.vercel.app/test",
-        },
+        }),
         {
           headers: {
             Authorization: `Basic ${Buffer.from(
