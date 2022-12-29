@@ -18,6 +18,14 @@ export const cafe24Router = router({
           code,
           redirect_uri: "https://moico-admin.vercel.app/test",
         },
+        {
+          headers: {
+            Authorization: `Basic ${Buffer.from(
+              `OwndE7DgN1Nv2RsPA2euHG:${process.env.CAFE24_CLIENT_SECRET}`,
+            ).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        },
       );
     }),
   createScript: publicProcedure
