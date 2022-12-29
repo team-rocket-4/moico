@@ -9,8 +9,6 @@ export default function Test() {
       ? sessionStorage.getItem("@moico/cafe24/mallId")
       : null;
 
-  console.log("test");
-
   const { data } = trpc.cafe24.accessToken.useQuery(
     {
       code: query.code as string,
