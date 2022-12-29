@@ -2,5 +2,6 @@ packages:
   - apps/admin
   - apps/internal-admin
   - packages/api
+  - packages/api-client
   - packages/auth
   - packages/config/*
