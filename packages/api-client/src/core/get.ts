@@ -1,12 +1,21 @@
-import axios, { AxiosRequestConfig } from "axios";
-
-export function get<Response>(
+export async function get(
   url: string,
-  query?: AxiosRequestConfig["params"],
-  options?: AxiosRequestConfig,
+  queryParams?: URLSearchParams,
+  options: Omit<RequestInit, "method" | "body"> = {},
 ) {
-  return axios.get<Response>(url, {
-    params: query,
-    ...options,
-  });
+  const res = await fetch(
+    `${url}${
+      queryParams == null ? "" : `?${new URLSearchParams(queryParams)}`
+    }`,
+    {
+      credentials: "include",
+      ...options,
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
+
+  return res.json();
 }
