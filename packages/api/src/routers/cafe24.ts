@@ -1,7 +1,5 @@
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
-import { coreApi } from "@moico/api-client";
-import qs from "qs";
 
 export const cafe24Router = router({
   accessToken: publicProcedure
@@ -12,21 +10,21 @@ export const cafe24Router = router({
       }),
     )
     .query(async ({ input: { mallId, code } }) => {
-      return coreApi.post(
+      const res = await fetch(
         `https://${mallId}.cafe24api.com/api/v2/oauth/token`,
-        qs.stringify({
-          grant_type: "authorization_code",
-          code,
-          redirect_uri: "https://moico-admin.vercel.app/test",
-        }),
         {
+          method: "POST",
           headers: {
             Authorization: `Basic ${Buffer.from(
               `OwndE7DgN1Nv2RsPA2euHG:${process.env.CAFE24_CLIENT_SECRET}`,
             ).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
           },
+          body: `grant_type=authorization_code&code=${code}&redirect_uri=https://moico-admin.vercel.app/test`,
         },
       );
+
+      return res.json();
     }),
   createScript: publicProcedure
     .input(
@@ -36,20 +34,23 @@ export const cafe24Router = router({
       }),
     )
     .mutation(async ({ input: { mallId, accessToken } }) => {
-      return coreApi.post(
+      const res = await fetch(
         `https://${mallId}.cafe24api.com/api/v2/admin/scripttags`,
         {
-          request: {
-            src: "https://moico-admin.vercel.app/recently-seen-products.js",
-            display_location: ["PRODUCT_DETAIL"],
-          },
-        },
-        {
+          method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({
+            request: {
+              src: "https://moico-admin.vercel.app/recently-seen-products.js",
+              display_location: ["PRODUCT_DETAIL"],
+            },
+          }),
         },
       );
+
+      return res.json();
     }),
 });
