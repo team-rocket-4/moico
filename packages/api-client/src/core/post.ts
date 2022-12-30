@@ -1,6 +1,6 @@
 import qs from "qs";
 
-export async function post(
+export async function post<ResponseType>(
   url: string,
   data: Record<string, unknown>,
   options: Omit<RequestInit, "method" | "body"> = {},
@@ -27,5 +27,5 @@ export async function post(
     throw new Error(await res.text());
   }
 
-  return res.json();
+  return res.json() as ResponseType;
 }
