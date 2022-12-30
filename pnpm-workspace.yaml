@@ -1,5 +1,6 @@
 packages:
   - apps/admin
+  - apps/recently-seen-products
   - packages/api
   - packages/api-client
   - packages/auth
