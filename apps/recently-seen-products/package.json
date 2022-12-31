@@ -6,14 +6,12 @@
   "scripts": {
     "dev": "vite --port=4000",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@moico/api": "*",
+    "@moico/api-client": "*",
     "@tanstack/react-query": "^4.19.1",
-    "@trpc/client": "^10.5.0",
-    "@trpc/react-query": "^10.5.0",
-    "@trpc/server": "^10.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
