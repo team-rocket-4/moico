@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "exclude": [],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

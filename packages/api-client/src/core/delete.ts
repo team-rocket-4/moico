@@ -4,7 +4,6 @@ export async function deleteRequest<ResponseType>(
 ) {
   const res = await fetch(url, {
     method: "DELETE",
-    credentials: "include",
     ...options,
   });
 

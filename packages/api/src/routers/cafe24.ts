@@ -1,6 +1,7 @@
 import { coreApi } from "@moico/api-client";
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { cafe24ClientId } from "../constants/cafe24-client-id";
 
 interface AccessTokenResponse {
   access_token: string;
@@ -55,13 +56,14 @@ export const cafe24Router = router({
         {
           headers: {
             Authorization: `Basic ${Buffer.from(
-              `OwndE7DgN1Nv2RsPA2euHG:${process.env.CAFE24_CLIENT_SECRET}`,
+              `${cafe24ClientId}:${process.env.CAFE24_CLIENT_SECRET}`,
             ).toString("base64")}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         },
       );
     }),
+  // TODO(@Jaehoo-dev): src, display_location 외부에서 주입
   createScript: publicProcedure
     .input(
       z.object({
@@ -85,6 +87,7 @@ export const cafe24Router = router({
         },
       );
     }),
+  // TODO(@Jaehoo-dev): src 외부에서 주입
   removeScript: publicProcedure
     .input(
       z.object({
