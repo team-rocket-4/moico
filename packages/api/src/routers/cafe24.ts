@@ -2,7 +2,6 @@ import { coreApi } from "@moico/api-client";
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { cafe24ClientId } from "../constants/cafe24-client-id";
-import { Cafe24Product } from "../models/cafe24-product";
 
 interface AccessTokenResponse {
   access_token: string;
@@ -117,24 +116,6 @@ export const cafe24Router = router({
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
-    }),
-  product: publicProcedure
-    .input(
-      z.object({
-        mallId: z.string(),
-        productId: z.number(),
-      }),
-    )
-    .query(({ input: { mallId, productId } }) => {
-      return coreApi.get<{ product: Cafe24Product }>(
-        `https://${mallId}.cafe24api.com/api/v2/products/${productId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-Cafe24-Client-Id": cafe24ClientId,
           },
         },
       );
