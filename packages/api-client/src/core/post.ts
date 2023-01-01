@@ -18,6 +18,7 @@ export async function post<ResponseType>(
       headers.get("Content-Type") === "application/x-www-form-urlencoded"
         ? qs.stringify(data)
         : JSON.stringify(data),
+    credentials: "include",
     headers,
     ...restOptions,
   });

@@ -98,6 +98,7 @@ importers:
 
   apps/server:
     specifiers:
+      '@moico/api-client': '*'
       '@nestjs/cli': ^9.0.0
       '@nestjs/common': ^9.0.0
       '@nestjs/core': ^9.0.0
@@ -126,6 +127,7 @@ importers:
       tsconfig-paths: 4.1.0
       typescript: ^4.9.4
     dependencies:
+      '@moico/api-client': link:../../packages/api-client
       '@nestjs/common': 9.2.1_mnr6j2del53muneqly5h4y27ai
       '@nestjs/core': 9.2.1_e6la6qvsclaae2becwjnmfvsuq
       '@nestjs/platform-express': 9.2.1_hjcqpoaebdr7gdo5hgc22hthbe
