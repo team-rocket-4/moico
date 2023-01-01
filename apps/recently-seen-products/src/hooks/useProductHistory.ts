@@ -16,10 +16,6 @@ export function useProductHistory() {
   );
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(history));
-  }, [history]);
-
-  const update = () => {
     if (currentProduct == null) {
       return;
     }
@@ -40,10 +36,11 @@ export function useProductHistory() {
 
       return history;
     });
-  };
+  }, [currentProduct]);
 
-  return {
-    data: history.slice(-11, -1),
-    update,
-  };
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(history));
+  }, [history]);
+
+  return history.slice(-11, -1);
 }
