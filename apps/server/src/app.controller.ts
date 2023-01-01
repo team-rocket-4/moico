@@ -13,11 +13,11 @@ export class AppController {
   }
 
   @Get('/cafe24/malls/:mallId/products/:productId')
-  getProduct(
+  async getProduct(
     @Param('mallId') mallId: string,
     @Param('productId') productId: number,
   ) {
-    return axios.get(
+    const res = await axios.get(
       `https://${mallId}.cafe24api.com/api/v2/productsdetail/${productId}`,
       {
         headers: {
@@ -26,5 +26,7 @@ export class AppController {
         },
       },
     );
+
+    return res.data;
   }
 }

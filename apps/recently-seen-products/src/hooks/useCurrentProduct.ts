@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMallId } from "./useMallId";
 import { Cafe24Product } from "../models/Cafe24Product";
+import { coreApi } from "@moico/api-client";
 
 const dummyLocalRecentProduct1 = JSON.stringify({
   0: {
@@ -28,13 +29,11 @@ export function useCurrentProduct() {
       currentProductData?.iProductNo,
     ],
     async () => {
-      const res = await fetch(
+      const res = await coreApi.get<{ productsdetail: Cafe24Product }>(
         `http://localhost:8000/cafe24/malls/${mallId}/products/${currentProductData.iProductNo}`,
       );
 
-      const result = await res.json();
-
-      return result.productsdetail as Cafe24Product;
+      return res.productsdetail;
     },
     {
       enabled: mallId != null && currentProductData?.iProductNo != null,
