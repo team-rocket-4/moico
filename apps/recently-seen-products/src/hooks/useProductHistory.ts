@@ -3,14 +3,15 @@ import { useCurrentProduct } from "./useCurrentProduct";
 
 const key = "@moico/cafe24/recently-seen-products";
 
-interface Product {
-  iProductNo: number;
+interface HistoryItem {
+  id: number;
+  imagePath: string;
 }
 
 export function useProductHistory() {
-  const currentProduct = useCurrentProduct();
+  const { data: currentProduct } = useCurrentProduct();
   const saved = localStorage.getItem(key);
-  const [history, setHistory] = useState<Product[]>(
+  const [history, setHistory] = useState<HistoryItem[]>(
     saved == null ? [] : JSON.parse(saved),
   );
 
@@ -19,8 +20,12 @@ export function useProductHistory() {
   }, [history]);
 
   const update = () => {
+    if (currentProduct == null) {
+      return;
+    }
+
     const index = history.findIndex((item) => {
-      return item.iProductNo === currentProduct.iProductNo;
+      return item.id === currentProduct.product_no;
     });
 
     setHistory((history) => {
@@ -28,7 +33,10 @@ export function useProductHistory() {
         history.splice(index, 1);
       }
 
-      history.push(currentProduct);
+      history.push({
+        id: currentProduct.product_no,
+        imagePath: currentProduct.small_image,
+      });
 
       return history;
     });

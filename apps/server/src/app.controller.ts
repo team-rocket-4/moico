@@ -1,5 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
+import { cafe24ClientId } from './constants/cafe24-client-id';
+import got from 'got';
 
 @Controller()
 export class AppController {
@@ -8,5 +10,21 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('/cafe24/malls/:mallId/products/:productId')
+  getProduct(
+    @Param('mallId') mallId: string,
+    @Param('productId') productId: number,
+  ) {
+    return got.get(
+      `https://${mallId}.cafe24api.com/api/v2/productsdetail/${productId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Cafe24-Client-Id': cafe24ClientId,
+        },
+      },
+    );
   }
 }
