@@ -1,23 +1,24 @@
-import qs from "qs";
+import qs from 'qs';
 
 export async function post<ResponseType>(
   url: string,
   data: Record<string, unknown>,
-  options: Omit<RequestInit, "method" | "body"> = {},
+  options: Omit<RequestInit, 'method' | 'body'> = {},
 ) {
   const { headers: _headers, ...restOptions } = options;
   const headers = new Headers(_headers);
   headers.set(
-    "Content-Type",
-    headers.get("Content-Type") ?? "application/json",
+    'Content-Type',
+    headers.get('Content-Type') ?? 'application/json',
   );
 
   const res = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     body:
-      headers.get("Content-Type") === "application/x-www-form-urlencoded"
+      headers.get('Content-Type') === 'application/x-www-form-urlencoded'
         ? qs.stringify(data)
         : JSON.stringify(data),
+    credentials: 'include',
     headers,
     ...restOptions,
   });

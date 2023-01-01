@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { coreApi } from '@moico/api-client';
 import { cafe24ClientId } from './constants/cafe24-client-id';
+import { apiClient } from './utils/api-client';
 
 @Controller()
 export class AppController {
@@ -17,7 +17,7 @@ export class AppController {
     @Param('mallId') mallId: string,
     @Param('productId') productId: number,
   ) {
-    return coreApi.get(
+    return apiClient.get(
       `https://${mallId}.cafe24api.com/api/v2/productsdetail/${productId}`,
       {
         headers: {
