@@ -2,27 +2,38 @@ import { ChangeEvent, useState } from "react";
 import { trpc } from "../utils/trpc";
 
 export default function AdminHome() {
+  console.log(typeof window);
+  const rawAuthInfo =
+    typeof window === "undefined"
+      ? null
+      : localStorage.getItem("@moico/cafe24/auth-info");
+
+  const authInfo = rawAuthInfo == null ? null : JSON.parse(rawAuthInfo);
+  const mallId = authInfo?.mall_id;
+  const accessToken = authInfo?.access_token;
+
   const { mutateAsync: createScript } = trpc.cafe24.createScript.useMutation();
   const { mutateAsync: removeScript } = trpc.cafe24.removeScript.useMutation();
-  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const { data: script } = trpc.cafe24.findScript.useQuery(
+    { mallId, accessToken },
+    {
+      enabled: mallId != null && accessToken != null,
+    },
+  );
+  const 스크립트를_설치했는가 = script != null;
 
   const installApp = async () => {
-    const rawAuthInfo = localStorage.getItem("@moico/cafe24/auth-info");
-    const authInfo = rawAuthInfo == null ? null : JSON.parse(rawAuthInfo);
     const result = await createScript({
-      mallId: authInfo?.mall_id,
-      accessToken: authInfo?.access_token,
+      mallId,
+      accessToken,
     });
     console.log(result);
   };
 
   const removeApp = async () => {
-    const rawAuthInfo = localStorage.getItem("@moico/cafe24/auth-info");
-    const authInfo = rawAuthInfo == null ? null : JSON.parse(rawAuthInfo);
-
     const result = await removeScript({
-      mallId: authInfo?.mall_id,
-      accessToken: authInfo?.access_token,
+      mallId,
+      accessToken,
     });
     console.log(result);
   };
@@ -36,7 +47,6 @@ export default function AdminHome() {
       } else {
         await removeApp();
       }
-      setIsToggled(!isToggled);
     } catch (e) {
       throw Error("Error!!");
     }
@@ -56,7 +66,7 @@ export default function AdminHome() {
                 <input
                   type="checkbox"
                   className="peer sr-only"
-                  checked={isToggled}
+                  defaultChecked={스크립트를_설치했는가}
                   onChange={handleChangeToggle}
                 />
                 <div className="peer-checked:bg-moico-blue-100 peer h-6 w-9 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-3 peer-checked:after:border-white  dark:border-gray-600 dark:bg-gray-700 "></div>

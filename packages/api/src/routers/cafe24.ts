@@ -120,4 +120,27 @@ export const cafe24Router = router({
         },
       );
     }),
+  findScript: publicProcedure
+    .input(
+      z.object({
+        mallId: z.string(),
+        accessToken: z.string(),
+      }),
+    )
+    .query(async ({ input: { mallId, accessToken } }) => {
+      const { scripttags: scripts } = await coreApi.get<GetScriptsResponse>(
+        `https://${mallId}.cafe24api.com/api/v2/admin/scripttags`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      return scripts.find((script) => {
+        return (
+          script.src ===
+          "https://moico-admin.vercel.app/recently-seen-products.js"
+        );
+      });
+    }),
 });
