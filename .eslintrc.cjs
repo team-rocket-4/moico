@@ -12,4 +12,7 @@ module.exports = {
   },
   plugins: ["@typescript-eslint"],
   extends: ["plugin:@typescript-eslint/recommended"],
+  rules: {
+    "@next/next/no-img-element": "off",
+  },
 };
