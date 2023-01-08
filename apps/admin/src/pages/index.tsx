@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { trpc } from "../utils/trpc";
-const removeApp = () => {};
+
 export default function AdminHome() {
   const { mutateAsync: createScript } = trpc.cafe24.createScript.useMutation();
   const { mutateAsync: removeScript } = trpc.cafe24.removeScript.useMutation();
@@ -24,19 +24,22 @@ export default function AdminHome() {
       mallId: authInfo?.mall_id,
       accessToken: authInfo?.access_token,
     });
-
     console.log(result);
   };
 
-  const handleChangeToggle = (e: ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target;
+  const handleChangeToggle = async (e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const { checked } = e.target;
 
-    if (checked) {
-      installApp();
-    } else {
-      removeApp();
+      if (checked) {
+        await installApp();
+      } else {
+        await removeApp();
+      }
+      setIsToggled(!isToggled);
+    } catch (e) {
+      throw Error("Error!!");
     }
-    setIsToggled(!isToggled);
   };
   return (
     <div className="m-auto flex h-screen flex-col items-center justify-center">
