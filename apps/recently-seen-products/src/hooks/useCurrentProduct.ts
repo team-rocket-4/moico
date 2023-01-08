@@ -24,13 +24,15 @@ export function useCurrentProduct() {
 
   return useQuery(
     [
-      "/cafe24/malls/:mallId/products/:productId}",
+      import.meta.env.CAFE24_PROXY_SERVER_URL,
       mallId,
       currentProductData?.iProductNo,
     ],
     async () => {
       const res = await coreApi.get<{ productsdetail: Cafe24Product }>(
-        `http://localhost:8000/cafe24/malls/${mallId}/products/${currentProductData.iProductNo}`,
+        `${
+          import.meta.env.CAFE24_PROXY_SERVER_URL
+        }?mallId=${mallId}&productId=${currentProductData.iProductNo}`,
       );
 
       return res.productsdetail;
