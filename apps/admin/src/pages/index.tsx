@@ -1,13 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { trpc } from "../utils/trpc";
 
 export default function AdminHome() {
-  console.log(typeof window);
   const rawAuthInfo =
     typeof window === "undefined"
       ? null
       : localStorage.getItem("@moico/cafe24/auth-info");
-
   const authInfo = rawAuthInfo == null ? null : JSON.parse(rawAuthInfo);
   const mallId = authInfo?.mall_id;
   const accessToken = authInfo?.access_token;
